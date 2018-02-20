@@ -3,10 +3,6 @@ library(rvest)
 library(dplyr)
 library(tidyr)
 library(stringr)
-library(readxl)
-
-#read in events list
-#all_events_list <- readRDS("C:/Users/Ben/Desktop/R Projects/olympics/all_events_2018.rds")
 
 #global vars
 hilo_cols <- 2
