@@ -5,9 +5,9 @@ library(tidyr)
 library(stringr)
 
 #global vars
-hilo_cols <- 2
+hilo_cols <- 2  #sets the number of highest and lowest odds columns; one for each.
 
-#Function for scrapign nicerodds website
+#Function for scraping nicerodds website
 nicerodds_scraper <- function(url, hilo_cols = 2) {
   
   #read in and save url
@@ -31,7 +31,7 @@ nicerodds_scraper <- function(url, hilo_cols = 2) {
   event_names <- html_text(event_names)
   event_names <- as.data.frame(event_names)
   
-  event_names[,1] <- gsub("\\(.*","", event_names[,1])  #remove country abbreviations and parenthesis from name col
+  event_names[,1] <- gsub("\\(.*","", event_names[,1])  #remove country abbreviations and parentheses from name col
   event_names[,1] <- sub("\\s+$", "", event_names[,1])  #remove trailing white space
   
   #odds hi lo
@@ -50,15 +50,11 @@ nicerodds_scraper <- function(url, hilo_cols = 2) {
     bind_cols(event_odds) %>%
     head(-1)
   
-  #will need to do something with duplicate names similar to what I did with baseball
-  
   #name cols
   names(event_df) <- names(event_headers)  #convert to headers df names
   
   #add event col
   event_df$event <- event
-  
-  #add ifelse() for event that there are no odds posted
   
   #return event df
   event_df
